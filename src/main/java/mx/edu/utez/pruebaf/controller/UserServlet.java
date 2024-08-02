@@ -14,7 +14,7 @@ import java.io.IOException;
 //el parametro de value es la ruta para llegar a este servlet
 //Debe de comenzar con una / y la ruta que tu quieras
 //Nota no le vayan a poner espacios
-@WebServlet(name="UserServlet",value="/login")
+@WebServlet(name="UserServlet", value="/login")
 public class UserServlet extends HttpServlet{
 
 
@@ -35,7 +35,7 @@ public class UserServlet extends HttpServlet{
         // que proviene del jsp
 
         //Es que el método doPost haga el inicio de sesión
-        String user = req.getParameter("user");
+        String correoU = req.getParameter("correoU");
         // ^ esto funciona siii, el input del form
         // tiene el name = "user"
         String contra = req.getParameter("contra");
@@ -44,19 +44,19 @@ public class UserServlet extends HttpServlet{
         // Me hace falta llamar a un archivo para ver si existe
         // o no el usuario en la base de datos
         UserDao dao = new UserDao();
-        User usuario = dao.getOne(user, contra);
+        User usuario = dao.getOne(correoU, contra);
 
         //Imprimir el nombre del usuario en la base de datos
         //Si no existe el usuario entonces imprime null
-        System.out.println(usuario.getNombre());
+        System.out.println("Si el usuario existe imprime el correo y si no; imprime (null):\n"+usuario.getCorreo());
         String ruta = "index.jsp";
         HttpSession sesion = req.getSession();
-        if(usuario.getNombre() == null){
+        if(usuario.getCorreo() == null){
             //Entonces no voy a poder iniciar sesión
-            sesion.setAttribute("mensaje", "El usuario no existe en la base de datos");
+            sesion.setAttribute("mensaje", "El usuario no existe en la base de datos o está inactivo");
         }else{
             //Entonces si inicie la sesión
-            ruta = "bienvenido.jsp";
+            ruta = "menuPrincipal.jsp";
             sesion.removeAttribute("mensaje");
             sesion.setAttribute("usuario", usuario);
         }

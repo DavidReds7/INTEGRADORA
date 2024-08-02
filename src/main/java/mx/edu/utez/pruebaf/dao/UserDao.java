@@ -1,8 +1,6 @@
 package mx.edu.utez.pruebaf.dao;
-
 import mx.edu.utez.pruebaf.model.User;
 import mx.edu.utez.pruebaf.utils.DatabaseConnectionManager;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,18 +9,20 @@ import java.util.ArrayList;
 
 public class UserDao {
 
-    public User getOne(String user, String contra){
+    public User getOne(String correoU, String contra){
         User u = new User();
-        String query = "select * from users where nombre = ? and contra = sha2(?,256)";
+        String query = "select * from usuarios where correo = ? and password = sha2(?,256)";
         try{
             Connection con = DatabaseConnectionManager.getConnection();
             PreparedStatement ps = con.prepareStatement(query);
-            ps.setString(1, user);
+            ps.setString(1, correoU);
             ps.setString(2, contra);
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
-                u.setNombre(rs.getString("nombre"));
+                u.setCorreo(rs.getString("correo"));
                 u.setContra(rs.getString("contra"));
+                u.setNombre(rs.getString("nombre"));
+                System.out.println("nombre del usuario: "+u.getNombre());
             }
             con.close();
         } catch (SQLException e){
@@ -56,19 +56,24 @@ public class UserDao {
 
     public ArrayList<User> getAll(){
         ArrayList<User> lista = new ArrayList<>();
-        String query = "select * from users";
+        String query = "select * from usuarios";
         try{
             Connection con = DatabaseConnectionManager.getConnection();
             PreparedStatement ps = con.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 User u = new User();
-                u.setId(rs.getInt("Id"));
+                /* columnLabel es como aparece en la base de datos "idUsuarios" */
+                u.setId(rs.getInt("idUsuarios"));
                 u.setNombre(rs.getString("nombre"));
+                u.setApellido(rs.getString("apellido"));
                 u.setCorreo(rs.getString("correo"));
-                u.setContra(rs.getString("contra"));
-                u.setCodigo(rs.getString("codigo"));
+                u.setPuesto(rs.getString("puesto"));
+                u.setAdmin(rs.getBoolean("admin"));
+                u.setRfc(rs.getString("rfc"));
                 u.setEstado(rs.getBoolean("estado"));
+                u.setCodigo(rs.getString("codigo"));
+                u.setContra(rs.getString("password"));
                 lista.add(u);
             }
             con.close();

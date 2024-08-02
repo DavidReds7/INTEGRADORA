@@ -19,18 +19,18 @@ public class PdfServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //Seleccinar una imagen de los assets (logo)
-        String ruta = "/img/Logo.png";
+        String ruta ="/img/logo.png";
         File imagen = new File(getServletContext().getRealPath(ruta));
         FileInputStream archivo = new FileInputStream(imagen);
 
         //Obtener ubicación y bytes del reporte
-        String report = "/WEB-INF/reporteF.jasper";
+        String report = "/WEB-INF/reporteActivos.jasper";
         File file = new File(getServletContext().getRealPath(report));
         InputStream input = new FileInputStream(file);
 
         //Colocar los parametros del reporte
         Map mapa = new HashMap();
-        mapa.put("Logo", archivo);
+        mapa.put("ParametroImgRuta", archivo);
 
 
         //obtener una coneccion a los datos

@@ -1,14 +1,19 @@
-<%@ page import="mx.edu.utez.pruebaf.model.User" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="mx.edu.utez.pruebaf.model.User"%>
+<%@ page contentType="text/html;charset=UTF-8"%>
 <html>
 <head>
-    <title>Title</title>
-</head>
-<body>
     <%
         HttpSession sesion = request.getSession();
         User u = (User) sesion.getAttribute("usuario");
-        if(u != null) { %>
+        if (u != null) { %>
+    <title>Actualizar Usuario</title>
+    <% } else { %>
+    <title>Registrar Usuario</title>
+    <% } %>
+</head>
+<body>
+    <%
+        if (u != null) { %>
     <!-- Entonces quiero actualizar -->
     <form method="post" action="sign_in">
         <label>Ingrese su nombre: </label>

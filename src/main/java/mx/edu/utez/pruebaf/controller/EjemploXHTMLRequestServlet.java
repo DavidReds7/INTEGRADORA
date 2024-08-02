@@ -1,3 +1,4 @@
+/*
 package mx.edu.utez.pruebaf.controller;
 
 import com.google.gson.Gson;
@@ -25,3 +26,4 @@ public class EjemploXHTMLRequestServlet extends HttpServlet {
         resp.getWriter().write(json);
     }
 }
+*/
