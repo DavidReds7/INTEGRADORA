@@ -1,15 +1,16 @@
-<%@ page import="mx.edu.utez.pruebaf.dao.UserDao"%>
-<%@ page import="mx.edu.utez.pruebaf.model.User"%>
+<%@ page import="mx.edu.utez.pruebaf.dao.ActivoDao"%>
+<%@ page import="mx.edu.utez.pruebaf.model.Activo"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page contentType="text/html;charset=UTF-8"%>
+
 <!DOCTYPE html>
-<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestion de Activos</title>
-    <link rel="stylesheet" href="CSS/bootstrap.css">
-    <link rel="stylesheet" href="CSS/styles.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/datatables.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/styles.css">
     <link rel="icon" href="img/logo_mini.png" type="image/x-icon">
 </head>
 <body>
@@ -22,47 +23,93 @@
             <img src="img/headerWave.png" alt="Header Waves" class="img-fluid">
         </div>
     </header>
-
-
     <!-- AQUI INICIA CONTENIDO DE LA PAGINA -->
 
-    <div class="flex-grow-1 container-md table-responsive-xxl p-2 text-center">
-        <table id="example" class="table table-striped table-hover table-bordered caption-top mt-3" style="width: 100%">
-            <!-- <caption style="font-size: 1.7rem">Activos</caption> -->
-            <thead class="table-light">
-            <tr>
-                <th>ID</th>
+    <div class="flex-grow-1 container-xl table-responsive p-2 text-center" style="width: 82rem">
+        <table id="example" class="table table-striped table-hover table-bordered mt-3" style="width: 100%">
+            <thead>
+            <tr style="background-color: #615DFD; color: white">
+                <th>Codigo</th>
+                <th>Nombre</th>
                 <th>Descripcion</th>
                 <th>Observaciones</th>
                 <th>Edificio</th>
                 <th>Habitacion</th>
-                <th>Actualizar</th>
-                <th>Eliminar</th>
-                <th>Mas Detalles</th>
+                <th >Actualizar</th>
+                <th >Eliminar</th>
+                <th >Detalles</th>
             </tr>
             </thead>
 
             <tbody class="table-group-divider">
-
-            <%
-            UserDao dao = new UserDao();
-            ArrayList<User> lista = dao.getAll();
-                for(User u : lista){ %>
+                <%
+                    ActivoDao dao = new ActivoDao();
+                    ArrayList<Activo> lista = dao.getAll();
+                    for(Activo a : lista){
+                %>
                 <tr>
-                    <td><%=u.getId()%></td>
-                    <td><%=u.getNombre()%></td>
-                    <td><%=u.getCorreo()%></td>
-                    <td><%=u.isEstado() ? "Activo":"Inactivo"%></td>
-                    <td><a href="login?id=<%=u.getId()%>">Actualizar</a></td>
-                    <td><a href="delete?id=<%=u.getId()%>">Eliminar</a></td>
+                    <td><%=a.getCodigo()%></td>
+                    <td><%=a.getNombre_activo()%></td>
+                    <td><%=a.getDescripcion()%></td>
+                    <td><%=a.getObservaciones()%></td>
+                    <td><%=a.getEdificio()%></td>
+                    <td><%=a.getHabitacion()%></td>
+                    <td><a href="login?id=<%=a.getCodigo()%>">
+                        <img src="img/edit.png" style="width: 2rem; height: auto" alt="Actualizar"></a>
+                    </td>
+                    <td><a href="delete?id=<%=a.getCodigo()%>">
+                        <img src="img/botonEliminar.png" style="width: 2rem; height: auto" alt="Eliminar"></a>
+                    </td>
+                    <td class="text-center">
+                        <button type="button" id="boton_detalles" onclick="pedir_detalles('<%=a.getCodigo()%>')">
+                        <img src="img/info.png" style="width: 2rem; height: auto; cursor: pointer" alt="Mas Detalles"
+                             data-bs-toggle="modal" data-bs-target="#infoModal" >
+                        </button>
+                    </td>
                 </tr>
                 <% } %>
             </tbody>
         </table>
+
+
+
+        <!-- Modal para mas informacion del activo -->
+        <div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl" style="max-width: 72rem">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-3 ms-2" id="exampleModalLabel">Detalles</h1>
+                        <button type="button" class="btn-close me-3" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+                        <table id="tablaModal" class="table table-striped table-hover table-bordered caption-top mt-3" style="width: 100%">
+                            <thead>
+                            <tr style="background-color: #615DFD; color: white">
+                                <th>Codigo</th>
+                                <th>Nombre</th>
+                                <th>Especificaciones</th>
+                                <th>Marca</th>
+                                <th>Modelo</th>
+                                <th>No. Serie</th>
+                            </tr>
+                            </thead>
+                            <tbody class="table-group-divider">
+                            <tr id="detalles">
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary gradient-button me-3" style="width: 9rem" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- AQUI TERMINA EL CONTENIDO DE LA PAGINA -->
 
+    <!-- AQUI TERMINA EL CONTENIDO DE LA PAGINA -->
 
     <footer>
         <img src="img/footerWaves.png" alt="Footer waves" class="img-fluid">
@@ -72,6 +119,8 @@
 
 
 <script src="JS/menuHamb.js"></script>
+<script src="JS/bootstrap.bundle.js"></script>
+<script src="JS/bootstrap.js"></script>
 
 <script src="${pageContext.request.contextPath}/JS/jquery-3.7.0.js"></script>
 <script src="${pageContext.request.contextPath}/JS/bootstrap.js"></script>
@@ -88,6 +137,33 @@
             }
         });
     });
+
+</script>
+
+<script>
+    function pedir_detalles(codi){
+        //Es un tr
+        var detalles = document.getElementById("detalles");
+        detalles.innerHTML = "";
+
+        fetch('getActivoDetalles?codigo='+codi,{
+            method: 'GET'
+        }).then(response => {
+            return response.text();
+        }).then(data => {
+            data = JSON.parse(data);
+            //console.log(data);
+            var cod = document.createElement("td");
+            cod.innerText = data.codigo;
+            detalles.appendChild(cod);
+
+
+        }).catch(error =>{
+            console.log("Ocurrio un error: ", error)
+        });
+    }
+
+
 </script>
 
 

@@ -8,7 +8,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import mx.edu.utez.pruebaf.dao.UserDao;
 import mx.edu.utez.pruebaf.model.User;
-
 import java.io.IOException;
 
 //el parametro de value es la ruta para llegar a este servlet
@@ -64,10 +63,8 @@ public class UserServlet extends HttpServlet{
     }
 
     public void destroy() {
-
     }
 
     public void init() throws ServletException {
-
     }
 }
