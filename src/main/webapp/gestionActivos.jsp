@@ -153,9 +153,36 @@
         }).then(data => {
             data = JSON.parse(data);
             //console.log(data);
+
+            //Coigo Activo
             var cod = document.createElement("td");
             cod.innerText = data.codigo;
             detalles.appendChild(cod);
+
+            //Nombre
+            var nom = document.createElement("td");
+            nom.innerText = data.nombre_activo;
+            detalles.appendChild(nom);
+
+            //Especificaciones
+            var esp = document.createElement("td");
+            esp.innerText = data.especificaciones;
+            detalles.appendChild(esp);
+
+            //Marca
+            var marc = document.createElement("td");
+            marc.innerText = data.marca;
+            detalles.appendChild(marc);
+
+            //Modelo
+            var mod = document.createElement("td");
+            mod.innerText = data.modelo;
+            detalles.appendChild(mod);
+
+            //No. Serie
+            var numS = document.createElement("td");
+            numS.innerText = data.num_serie;
+            detalles.appendChild(numS);
 
 
         }).catch(error =>{
