@@ -17,7 +17,7 @@
     </header>
     <!-- INICIO DEL CONTENIDO DE LA PAGINA -->
 
-    <div class="flex-grow-1 modal position-static d-block pt-0 pb-0 position-relative" style="background-color: #E8F5FF; height: 5px" tabindex="-1" role="dialog" id="modalSignin">
+    <div class="flex-grow-1 modal position-static d-block pt-0 pb-0 position-relative" style="background-color: #E8F5FF; height: 5px; text-align: center" tabindex="-1" role="dialog" id="modalSignin">
         <div class="modal-dialog" role="document" style="max-width: 55rem">
             <div class="modal-content rounded-4 shadow">
                 <div class="row">

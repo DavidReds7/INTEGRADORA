@@ -6,30 +6,26 @@ public class User {
     private String apellido;
     private String correo;
     private String puesto;
-    private boolean admin;
-    private String rfc;
-    private boolean estado;
-    private String codigo;//Delete
+    private boolean esAdmin;
+    private boolean estatus;
     private String contra;
 
-    //Constructor vacio
-    public User(){}
-
-    public User(int id, String nombre, String apellido, String correo, String puesto,
-                boolean admin, String rfc, boolean estado, String codigo, String contra) {
+    // Constructor con todos los atributos
+    public User(int id, String nombre, String apellido, String correo, String puesto, boolean esAdmin, boolean estatus, String contra) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.correo = correo;
         this.puesto = puesto;
-        this.admin = admin;
-        this.rfc = rfc;
-        this.estado = estado;
-        this.codigo = codigo;
+        this.esAdmin = esAdmin;
+        this.estatus = estatus;
         this.contra = contra;
     }
 
+    // Constructor vacío
+    public User() {}
 
+    // Getters y Setters
     public int getId() {
         return id;
     }
@@ -37,7 +33,6 @@ public class User {
     public void setId(int id) {
         this.id = id;
     }
-
 
     public String getNombre() {
         return nombre;
@@ -47,7 +42,6 @@ public class User {
         this.nombre = nombre;
     }
 
-
     public String getApellido() {
         return apellido;
     }
@@ -55,7 +49,6 @@ public class User {
     public void setApellido(String apellido) {
         this.apellido = apellido;
     }
-
 
     public String getCorreo() {
         return correo;
@@ -65,7 +58,6 @@ public class User {
         this.correo = correo;
     }
 
-
     public String getPuesto() {
         return puesto;
     }
@@ -74,42 +66,21 @@ public class User {
         this.puesto = puesto;
     }
 
-
-    public boolean isAdmin() {
-        return admin;
+    public boolean isEsAdmin() {
+        return esAdmin;
     }
 
-    public void setAdmin(boolean admin) {
-        this.admin = admin;
+    public void setEsAdmin(boolean esAdmin) {
+        this.esAdmin = esAdmin;
     }
 
-
-    public String getRfc() {
-        return rfc;
+    public boolean isEstatus() {
+        return estatus;
     }
 
-    public void setRfc(String rfc) {
-        this.rfc = rfc;
+    public void setEstatus(boolean estatus) {
+        this.estatus = estatus;
     }
-
-
-    public boolean isEstado() {
-        return estado;
-    }
-
-    public void setEstado(boolean estado) {
-        this.estado = estado;
-    }
-
-
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
-
 
     public String getContra() {
         return contra;
@@ -118,5 +89,4 @@ public class User {
     public void setContra(String contra) {
         this.contra = contra;
     }
-
 }

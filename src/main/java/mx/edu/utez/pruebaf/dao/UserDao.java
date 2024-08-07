@@ -1,6 +1,8 @@
 package mx.edu.utez.pruebaf.dao;
+
 import mx.edu.utez.pruebaf.model.User;
 import mx.edu.utez.pruebaf.utils.DatabaseConnectionManager;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,7 +13,7 @@ public class UserDao {
 
     public User getOne(String correoU, String contra){
         User u = new User();
-        String query = "select * from usuarios where correo = ? and password = sha2(?,256)";
+        String query = "SELECT * FROM usuarios WHERE correo = ? AND password = SHA2(?, 256)";
         try{
             Connection con = DatabaseConnectionManager.getConnection();
             PreparedStatement ps = con.prepareStatement(query);
@@ -20,9 +22,12 @@ public class UserDao {
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
                 u.setCorreo(rs.getString("correo"));
-                u.setContra(rs.getString("contra"));
+                u.setContra(rs.getString("password"));
                 u.setNombre(rs.getString("nombre"));
-                System.out.println("nombre del usuario: "+u.getNombre());
+                u.setApellido(rs.getString("apellido"));
+                u.setPuesto(rs.getString("puesto"));
+                u.setEsAdmin(rs.getBoolean("admin"));
+                u.setEstatus(rs.getBoolean("estado"));
             }
             con.close();
         } catch (SQLException e){
@@ -33,18 +38,18 @@ public class UserDao {
 
     public boolean insert(User u){
         boolean respuesta = false;
-        String query = "insert into users(nombre,correo,contra) values(?,?,sha2(?,256))";
+        String query = "INSERT INTO usuarios(nombre, apellido, correo, password, puesto, admin, estado) VALUES(?, ?, ?, SHA2(?, 256), ?, ?, ?)";
         try{
-            //1)Conectarme a la BD
             Connection con = DatabaseConnectionManager.getConnection();
-            //2)Preparar la query
             PreparedStatement ps = con.prepareStatement(query);
-            ps.setString(1,u.getNombre());
-            ps.setString(2,u.getCorreo());
-            ps.setString(3,u.getContra());
-            //3)Ejecutar el query
-            if(ps.executeUpdate()>0){
-                //Si se hizo la inserción
+            ps.setString(1, u.getNombre());
+            ps.setString(2, u.getApellido());
+            ps.setString(3, u.getCorreo());
+            ps.setString(4, u.getContra());
+            ps.setString(5, u.getPuesto());
+            ps.setBoolean(6, u.isEsAdmin());
+            ps.setBoolean(7, u.isEstatus());
+            if(ps.executeUpdate() > 0){
                 respuesta = true;
             }
             con.close();
@@ -56,23 +61,20 @@ public class UserDao {
 
     public ArrayList<User> getAll(){
         ArrayList<User> lista = new ArrayList<>();
-        String query = "select * from usuarios";
+        String query = "SELECT * FROM usuarios";
         try{
             Connection con = DatabaseConnectionManager.getConnection();
             PreparedStatement ps = con.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 User u = new User();
-                /* columnLabel es como aparece en la base de datos "idUsuarios" */
                 u.setId(rs.getInt("idUsuarios"));
                 u.setNombre(rs.getString("nombre"));
                 u.setApellido(rs.getString("apellido"));
                 u.setCorreo(rs.getString("correo"));
                 u.setPuesto(rs.getString("puesto"));
-                u.setAdmin(rs.getBoolean("admin"));
-                u.setRfc(rs.getString("rfc"));
-                u.setEstado(rs.getBoolean("estado"));
-                u.setCodigo(rs.getString("codigo"));
+                u.setEsAdmin(rs.getBoolean("admin"));
+                u.setEstatus(rs.getBoolean("estado"));
                 u.setContra(rs.getString("password"));
                 lista.add(u);
             }
@@ -83,19 +85,21 @@ public class UserDao {
         return lista;
     }
 
-    //Update <-- aveces se apoya de otro metodo getOne
     public boolean update(User u){
         boolean flag = false;
-        String query = "update users set nombre=?,contra=sha2(?,256),correo=? where id=?";
+        String query = "UPDATE usuarios SET nombre=?, apellido=?, correo=?, password=SHA2(?, 256), puesto=?, admin=?, estado=? WHERE idUsuarios=?";
         try{
             Connection con = DatabaseConnectionManager.getConnection();
             PreparedStatement ps = con.prepareStatement(query);
-            ps.setString(1,u.getNombre());
-            ps.setString(2,u.getContra());
-            ps.setString(3,u.getCorreo());
-            ps.setInt(4,u.getId());
-            if(ps.executeUpdate()>0){
-                //Que si se hizo la modificación o modificaciones
+            ps.setString(1, u.getNombre());
+            ps.setString(2, u.getApellido());
+            ps.setString(3, u.getCorreo());
+            ps.setString(4, u.getContra());
+            ps.setString(5, u.getPuesto());
+            ps.setBoolean(6, u.isEsAdmin());
+            ps.setBoolean(7, u.isEstatus());
+            ps.setInt(8, u.getId());
+            if(ps.executeUpdate() > 0){
                 flag = true;
             }
             con.close();
@@ -107,7 +111,7 @@ public class UserDao {
 
     public User getOne(int id) {
         User u = new User();
-        String query = "select * from users where id = ?";
+        String query = "SELECT * FROM usuarios WHERE idUsuarios = ?";
         try{
             Connection con = DatabaseConnectionManager.getConnection();
             PreparedStatement ps = con.prepareStatement(query);
@@ -115,9 +119,13 @@ public class UserDao {
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
                 u.setNombre(rs.getString("nombre"));
-                u.setContra(rs.getString("contra"));
+                u.setApellido(rs.getString("apellido"));
                 u.setCorreo(rs.getString("correo"));
-                u.setId(rs.getInt("id"));
+                u.setPuesto(rs.getString("puesto"));
+                u.setEsAdmin(rs.getBoolean("admin"));
+                u.setEstatus(rs.getBoolean("estado"));
+                u.setContra(rs.getString("password"));
+                u.setId(rs.getInt("idUsuarios"));
             }
             con.close();
         } catch (SQLException e){
@@ -126,15 +134,14 @@ public class UserDao {
         return u;
     }
 
-    //Delete
     public boolean deleteFisico(int id) {
         boolean flag = false;
-        String query = "delete from users where id = ?";
+        String query = "DELETE FROM usuarios WHERE idUsuarios = ?";
         try{
             Connection con = DatabaseConnectionManager.getConnection();
             PreparedStatement ps = con.prepareStatement(query);
             ps.setInt(1, id);
-            if(ps.executeUpdate()>0){
+            if(ps.executeUpdate() > 0){
                 flag = true;
             }
             con.close();
@@ -146,12 +153,12 @@ public class UserDao {
 
     public boolean deleteLogico(int id) {
         boolean flag = false;
-        String query = "update users set estado = false where id = ?";
+        String query = "UPDATE usuarios SET estado = false WHERE idUsuarios = ?";
         try{
             Connection con = DatabaseConnectionManager.getConnection();
             PreparedStatement ps = con.prepareStatement(query);
             ps.setInt(1, id);
-            if(ps.executeUpdate()>0){
+            if(ps.executeUpdate() > 0){
                 flag = true;
             }
             con.close();
@@ -160,5 +167,4 @@ public class UserDao {
         }
         return flag;
     }
-
 }

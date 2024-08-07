@@ -72,7 +72,7 @@
                 </button>
                 <div class="collapse" id="orders-collapse">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                        <li><a href="#" class="link-light d-inline-flex text-decoration-none rounded">Agregar usuario</a></li>
+                        <li><a href="registrarUsuario.jsp" class="link-light d-inline-flex text-decoration-none rounded">Agregar usuario</a></li>
                         <li><a href="gestionUsuario.jsp" class="link-light d-inline-flex text-decoration-none rounded">Mostrar usuarios</a></li>
                     </ul>
                 </div>
