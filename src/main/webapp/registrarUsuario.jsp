@@ -125,18 +125,18 @@
                     }
                 });
 
-                const nombreAct = form.querySelector('#nombreAct');
-                const nombreActValue = nombreAct.value;
-                const nombreActValid = /^[a-zA-Z\s]+$/.test(nombreActValue);
+                const nombreUs = form.querySelector('#nombreUs');
+                const nombreUsValue = nombreUs.value;
+                const nombreUsValid = /^[a-zA-Z\s]+$/.test(nombreUsValue);
 
-                if (!nombreActValid) {
-                    nombreAct.classList.add('is-invalid');
+                if (!nombreUsValid) {
+                    nombreUs.classList.add('is-invalid');
                 } else {
-                    nombreAct.classList.remove('is-invalid');
-                    nombreAct.classList.add('is-valid');
+                    nombreUs.classList.remove('is-invalid');
+                    nombreUs.classList.add('is-valid');
                 }
 
-                if (!form.checkValidity() || !allSelectsValid || !nombreActValid) {
+                if (!form.checkValidity() || !allSelectsValid || !nombreUsValid) {
                     event.preventDefault()
                     event.stopPropagation()
                 }
