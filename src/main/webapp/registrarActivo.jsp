@@ -85,9 +85,9 @@
                     <label for="habAct" class="form-label">Habitación</label>
                     <select class="form-select" aria-label="seleccionar edificio" id="habAct" required>
                         <option value="" selected>Seleccionar...</option>
-                        <option value="1">Salon 1</option>
-                        <option value="2">Salon 2</option>
-                        <option value="3">Compu aula 10</option>
+                        <option value="1">A11</option>
+                        <option value="2">A13</option>
+                        <option value="3">A15</option>
                     </select>
                     <div class="invalid-feedback">Selecciona una habitación</div>
                 </div>
