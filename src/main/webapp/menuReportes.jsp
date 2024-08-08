@@ -24,7 +24,7 @@
     <div class="container-fluid flex-grow-1 pt-5" style="background-color: #E8F5FF; text-align: center">
         <div class="row pb-5 gx-5">
             <div class="col" style="text-align: center">
-                <a class="menuButtons gradient-button" href="#" role="button">Revisión de Activos</a>
+                <a class="menuButtons gradient-button" href="revisionActivos.jsp" role="button">Revisión de Activos</a>
             </div>
             <div class="col">
                 <a class="menuButtons gradient-button" href="#" type="button">Historial de Cambios</a>
