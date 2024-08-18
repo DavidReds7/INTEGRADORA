@@ -7,25 +7,27 @@ public class User {
     private String correo;
     private String puesto;
     private boolean esAdmin;
-    private boolean estatus;
+    private String rfc;
     private String contra;
+    private boolean estatus;  // Nuevo atributo para el estado del usuario
 
-    // Constructor con todos los atributos
-    public User(int id, String nombre, String apellido, String correo, String puesto, boolean esAdmin, boolean estatus, String contra) {
+    public User(int id, String nombre, String apellido, String correo, String puesto, boolean esAdmin, String rfc, boolean estatus, String contra) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.correo = correo;
         this.puesto = puesto;
         this.esAdmin = esAdmin;
-        this.estatus = estatus;
+        this.rfc = rfc;
         this.contra = contra;
+        this.estatus = estatus;  // Inicialización del nuevo atributo
     }
 
-    // Constructor vacío
-    public User() {}
+    public User() {
+    }
 
     // Getters y Setters
+
     public int getId() {
         return id;
     }
@@ -74,12 +76,12 @@ public class User {
         this.esAdmin = esAdmin;
     }
 
-    public boolean isEstatus() {
-        return estatus;
+    public String getRfc() {
+        return rfc;
     }
 
-    public void setEstatus(boolean estatus) {
-        this.estatus = estatus;
+    public void setRfc(String rfc) {
+        this.rfc = rfc;
     }
 
     public String getContra() {
@@ -89,4 +91,16 @@ public class User {
     public void setContra(String contra) {
         this.contra = contra;
     }
+
+    public boolean isEstatus() {  // Getter para estatus
+        return estatus;
+    }
+
+    public void setEstatus(boolean estatus) {  // Setter para estatus
+        this.estatus = estatus;
+    }
 }
+
+
+
+

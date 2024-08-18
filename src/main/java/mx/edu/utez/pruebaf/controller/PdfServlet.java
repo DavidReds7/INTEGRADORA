@@ -43,7 +43,7 @@ public class PdfServlet extends HttpServlet {
 
         //Configura como se va a ver la respuesta del Servlet
         resp.setContentType("application/pdf");  //Establecer el tipo de respuesta
-        resp.setHeader("Content-Disposition", "Attachment; filename=reporteF.pdf");  //esto es para forzar la descarga del archivo
+        resp.setHeader("Content-Disposition", "Attachment; filename=Reporte_General_Activos.pdf");  //esto es para forzar la descarga del archivo
 
         //Generar el reporte
         try {

@@ -60,9 +60,9 @@
                 </button>
                 <div class="collapse" id="dashboard-collapse">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                        <li><a href="#" class="link-light d-inline-flex text-decoration-none rounded">Generar reporte PDF</a></li>
-                        <li><a href="#" class="link-light d-inline-flex text-decoration-none rounded">Revision de activos</a></li>
-                        <li><a href="#" class="link-light d-inline-flex text-decoration-none rounded">Historial de cambios</a></li>
+                        <li><a href="pdf" class="link-light d-inline-flex text-decoration-none rounded">Generar reporte PDF</a></li>
+                        <li><a href="revActivos.jsp" class="link-light d-inline-flex text-decoration-none rounded">Revision de activos</a></li>
+                        <li><a href="historialCambios.jsp" class="link-light d-inline-flex text-decoration-none rounded">Historial de cambios</a></li>
                     </ul>
                 </div>
             </li>

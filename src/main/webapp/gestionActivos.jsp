@@ -58,7 +58,7 @@
                     <td class="text-center"><a href="login?id=<%=a.getCodigo()%>">
                         <img src="img/edit.png" style="width: 2rem; height: auto" alt="Actualizar"></a>
                     </td>
-                    <td class="text-center"><a href="delete?id=<%=a.getCodigo()%>">
+                    <td class="text-center"><a href="deleteActivo?codigo=<%=a.getCodigo()%>">
                         <img src="img/botonEliminar.png" style="width: 2rem; height: auto" alt="Eliminar"></a>
                     </td>
                     <td class="text-center">

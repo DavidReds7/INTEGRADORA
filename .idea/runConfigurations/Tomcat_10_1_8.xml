@@ -87,8 +87,6 @@
     <method v="2">
       <option name="Make" enabled="true" />
       <option name="BuildArtifacts" enabled="true">
-        <artifact name="pruebaF:war exploded" />
-        <artifact name="pruebaF:war" />
         <artifact name="scad:war exploded" />
         <artifact name="scad:war" />
       </option>

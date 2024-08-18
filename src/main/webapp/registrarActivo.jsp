@@ -23,23 +23,25 @@
 
 
     <div class="flex-grow-1 container-sm mt-3">
-        <form class="needs-validation" novalidate>
+        <form class="needs-validation" action="registrarActivo" novalidate>
             <div class="row mb-3"> <!-- Fila 1 -->
+                <div class="col"> <!-- Columna 2 -->
+                    <label for="codigoAct" class="form-label">Codigo</label>
+                    <input type="text" class="form-control" id="codigoAct" name="codigoAct" required>
+                    <div class="invalid-feedback">Ingresa un codigo</div>
+                </div>
+
                 <div class="col"> <!-- Columna 1 -->
                     <label for="nombreAct" class="form-label">Nombre del Activo</label>
-                    <input type="text" class="form-control" id="nombreAct" required>
+                    <input type="text" class="form-control" id="nombreAct" name="nombreAct" required>
                     <div class="invalid-feedback">Ingresa el nombre del activo, ó sin numeros</div>
                 </div>
 
-                <div class="col"> <!-- Columna 2 -->
-                    <label for="descripAct" class="form-label">Descripción</label>
-                    <input type="text" class="form-control" id="descripAct" required>
-                    <div class="invalid-feedback">Ingresa una descripción</div>
-                </div>
+
 
                 <div class="col"> <!-- Columna 3 -->
                     <label for="espeAct" class="form-label">Especificaciones</label>
-                    <input type="text" class="form-control" id="espeAct" required>
+                    <input type="text" class="form-control" id="espeAct" name="espeAct" required>
                     <div class="invalid-feedback">Ingresa las especificaciones</div>
                 </div>
             </div>
@@ -47,19 +49,19 @@
             <div class="row mb-3"> <!-- Fila 2 -->
                 <div class="col"> <!-- Columna 1 -->
                     <label for="marcaAct" class="form-label">Marca</label>
-                    <input type="text" class="form-control" id="marcaAct" required>
+                    <input type="text" class="form-control" id="marcaAct" name="marcaAct" required>
                     <div class="invalid-feedback">Ingresa la marca</div>
                 </div>
 
                 <div class="col"> <!-- Columna 2 -->
                     <label for="modAct" class="form-label">Modelo</label>
-                    <input type="text" class="form-control" id="modAct" required>
+                    <input type="text" class="form-control" id="modAct" name="modAct" required>
                     <div class="invalid-feedback">Ingresa el modelo</div>
                 </div>
 
                 <div class="col"> <!-- Columna 3 -->
                     <label for="numAct" class="form-label">No. Serie</label>
-                    <input type="text" class="form-control" id="numAct" required>
+                    <input type="text" class="form-control" id="numAct" name="numAct" required>
                     <div class="invalid-feedback">Ingresa el número de serie</div>
                 </div>
             </div>
@@ -67,12 +69,12 @@
             <div class="row mb-3"> <!-- Fila 3 -->
                 <div class="col mb-3"> <!-- Columna 1 -->
                     <label for="obsAct" class="form-label">Observaciones</label>
-                    <input type="text" class="form-control" id="obsAct">
+                    <input type="text" class="form-control" id="obsAct" name="obsAct">
                 </div>
 
                 <div class="col"> <!-- Columna 2 -->
                     <label for="edifAct" class="form-label">Edificio</label>
-                    <select class="form-select" aria-label="seleccionar edificio" id="edifAct" required>
+                    <select class="form-select" aria-label="seleccionar edificio" id="edifAct" name="edifAct" required>
                         <option value="" selected>Seleccionar...</option>
                         <option value="1">Docencia 1</option>
                         <option value="2">Docencia 2</option>
@@ -83,7 +85,7 @@
 
                 <div class="col"> <!-- Columnna 3 -->
                     <label for="habAct" class="form-label">Habitación</label>
-                    <select class="form-select" aria-label="seleccionar edificio" id="habAct" required>
+                    <select class="form-select" aria-label="seleccionar edificio" id="habAct" name="habAct" required>
                         <option value="" selected>Seleccionar...</option>
                         <option value="1">A11</option>
                         <option value="2">A13</option>
@@ -91,8 +93,17 @@
                     </select>
                     <div class="invalid-feedback">Selecciona una habitación</div>
                 </div>
+                <div class="col">
+                    <div class="col"> <!-- Columna 2 -->
+                        <label for="descripAct" class="form-label">Descripción</label>
+                        <input type="text" class="form-control" id="descripAct" name="descripAct" required>
+                        <div class="invalid-feedback">Ingresa una descripción</div>
+                    </div>
+                </div>
+
             </div>
             <div class="row justify-content-end me-1"> <!-- Fila 4 -->
+                <input type="hidden" name="operacion" value="registar">
                 <button type="submit" class="btn gradient-button mb-0" style="width: 22rem;">Agregar</button>
             </div>
         </form>

@@ -29,6 +29,9 @@
             <div class="col">
                 <a class="menuButtons gradient-button" href="pdf" type="button">Generar Reporte</a>
             </div>
+            <div class="col">
+                <a class="menuButtons gradient-button" href="historialCambios.jsp" type="button">Historial de cambios</a>
+            </div>
         </div>
     </div>
 

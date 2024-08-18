@@ -87,9 +87,12 @@
 
                 <div class="col"> <!-- Columna 3 -->
                     <label for="rfc" class="form-label">RFC</label>
-                    <input type="password" class="form-control" id="rfc" name="contra2" required>
+                    <input type="text" class="form-control" id="rfc" name="rfc" required>
                     <div class="invalid-feedback">Ingresa tu RFC</div>
                 </div>
+
+
+
             </div>
 
             <div class="row justify-content-end me-1"> <!-- Fila 4 -->
