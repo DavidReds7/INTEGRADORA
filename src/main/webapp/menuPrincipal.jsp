@@ -31,13 +31,13 @@
     <div class="container-fluid flex-grow-1 pt-5" style="background-color: #E8F5FF; text-align: center">
         <div class="row pb-5">
             <div class="col" style="text-align: center">
-                <a class="menuButtons gradient-button" href="gestionActivos.jsp" role="button">Gestion de Activos</a>
+                <a class="menuButtons gradient-button" href="gestionActivos.jsp" role="button">Gestión de Activos</a>
             </div>
             <div class="col">
                 <a class="menuButtons gradient-button" href="menuReportes.jsp" type="button">Reportes</a>
             </div>
             <div class="col">
-                <a class="menuButtons gradient-button" href=gestionUsuario.jsp type="button">Administracion de Usuarios</a>
+                <a class="menuButtons gradient-button" href=gestionUsuario.jsp type="button">Administración de Usuarios</a>
             </div>
         </div>
     </div>
@@ -90,12 +90,12 @@
 
         <div class="dropdown">
             <a href="#" class="d-flex align-items-center link-light text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="img/user.png" alt="" width="32" height="32" class="rounded-circle me-2">
+                <img src="img/scad.png" alt="" width="32" height="32" class="rounded-circle me-2">
                 <%
                     HttpSession sesion = request.getSession();
                     User u = (User) sesion.getAttribute("usuario");
                 %>
-                <strong style="color: white"><%= u.getPuesto() %> | <%= u.getNombre() %></strong>
+                <strong class="ms-2 fs-5" style="color: white"><%= u.getNombre() %> | <%= u.getPuesto() %></strong>
 
             </a>
             <ul class="dropdown-menu text-small shadow ms-5" style="text-align: center; background-color: rgba(232, 245, 255, 0.5)">

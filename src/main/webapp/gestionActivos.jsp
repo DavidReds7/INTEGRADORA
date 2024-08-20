@@ -27,9 +27,14 @@
     <!-- AQUI INICIA CONTENIDO DE LA PAGINA -->
 
     <div class="flex-grow-1 container-xl table-responsive p-2 text-center" style="width: 82rem">
-        <table id="example" class="table table-striped table-hover table-bordered mt-3" style="width: 100%">
-            <thead>
-            <tr style="background-color: #615DFD; color: white">
+        <div class="row justify-content-end" style="width: 100%;">
+            <a href="registrarActivo.jsp" type="button" class="btn gradient-button mb-0 fs-6 me-3" style="width: 12rem; height: 2.5rem">Agregar Activo</a>
+        </div>
+        <div class="row" style="width: 100%;">
+            <table id="example" class="table table-striped table-hover table-bordered mt-3" style="width: 100%">
+                <thead>
+                <tr class="text-center" style="background-color: #615DFD; color: white">
+                <th>ID</th>
                 <th>Codigo</th>
                 <th>Nombre</th>
                 <th>Descripcion</th>
@@ -49,13 +54,14 @@
                     for(Activo a : lista){
                 %>
                 <tr>
+                    <td><%=a.getIdActivo()%></td>
                     <td><%=a.getCodigo()%></td>
                     <td><%=a.getNombre_activo()%></td>
                     <td><%=a.getDescripcion()%></td>
                     <td><%=a.getObservaciones()%></td>
                     <td><%=a.getEdificio()%></td>
                     <td><%=a.getHabitacion()%></td>
-                    <td class="text-center"><a href="login?id=<%=a.getCodigo()%>">
+                    <td class="text-center"><a href="ActualizarActivo?codigo=<%=a.getCodigo()%>">
                         <img src="img/edit.png" style="width: 2rem; height: auto" alt="Actualizar"></a>
                     </td>
                     <td class="text-center"><a href="deleteActivo?codigo=<%=a.getCodigo()%>">
@@ -71,6 +77,7 @@
                 <% } %>
             </tbody>
         </table>
+        </div>
 
 
 

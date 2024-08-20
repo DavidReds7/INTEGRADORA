@@ -43,7 +43,7 @@ public class ActivoDao {
     //Insertar
     public boolean insert(Activo a) {
         boolean respuesta = false;
-        String query = "INSERT INTO activos(codigo, nombre_activo, descripcion, especificaciones, marca, modelo, num_serie, observaciones, ubicaciones_id_ubicacion) VALUES(?,?,?,?,?,?,?,?,1)";
+        String query = "INSERT INTO activos(codigo, nombre_activo, descripcion, especificaciones, marca, modelo, num_serie, observaciones, ubicaciones_id_ubicacion) VALUES(?,?,?,?,?,?,?,?,?)";
         try {
             Connection con = DatabaseConnectionManager.getConnection();
             PreparedStatement ps = con.prepareStatement(query);
@@ -55,6 +55,7 @@ public class ActivoDao {
             ps.setString(6, a.getModelo());
             ps.setInt(7, a.getNum_serie());
             ps.setString(8, a.getObservaciones());
+            ps.setInt(9, a.getUbicaciones_id_ubicacion());
 
 
             if (ps.executeUpdate() > 0) {
@@ -70,13 +71,14 @@ public class ActivoDao {
     //Traer todos en lista con todos sus datos
     public ArrayList<Activo> getAll() {
         ArrayList<Activo> lista = new ArrayList<>();
-        String query = "SELECT a.*, u.edificio, u.habitacion FROM activos a JOIN ubicaciones u ON a.ubicaciones_id_ubicacion = u.id_ubicacion";
+        String query = "SELECT a.*, u.edificio, u.habitacion FROM activos a JOIN ubicaciones u ON a.ubicaciones_id_ubicacion = u.id_ubicacion order by idActivo ASC";
         try {
             Connection con = DatabaseConnectionManager.getConnection();
             PreparedStatement ps = con.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Activo a = new Activo();
+                a.setIdActivo(rs.getInt("idActivo"));
                 a.setCodigo(rs.getString("codigo"));
                 a.setNombre_activo(rs.getString("nombre_activo"));
                 a.setDescripcion(rs.getString("descripcion"));

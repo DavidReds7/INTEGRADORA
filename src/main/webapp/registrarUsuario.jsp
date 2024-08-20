@@ -22,38 +22,43 @@
     <!-- AQUI INICIA CONTENIDO DE LA PAGINA -->
 
     <div class="flex-grow-1 container-sm mt-3">
-        <form class="needs-validation" action="sign_in" method="post" novalidate>
-            <input type="hidden" name="operacion" value="registrar">
-            <div class="row mb-3"> <!-- Fila 1 -->
+        <form class="needs-validation" action="registrarUsuario" method="post" novalidate>
+            <div class="row mb-5 mt-2"> <!-- Fila 1 -->
                 <div class="col"> <!-- Columna 1 -->
-                    <label for="nombreUs" class="form-label">Nombre del Usuario</label>
-                    <input type="text" class="form-control" id="nombreUs" name="nombre" required>
-                    <div class="invalid-feedback">Ingresa el nombre del usuario, ó sin numeros</div>
+                    <label for="nombreUs" class="form-label">Nombre:</label>
+                    <input type="text" class="form-control" id="nombreUs" name="nombreUs" maxlength="20" required>
+                    <div class="invalid-feedback">Ingresa el nombre del usuario o ingrésalo sin números</div>
                 </div>
 
                 <div class="col"> <!-- Columna 2 -->
-                    <label for="apellidoUs" class="form-label">Apellido</label>
-                    <input type="text" class="form-control" id="apellidoUs" name="apellido" required>
+                    <label for="apellidoUs" class="form-label">Apellido:</label>
+                    <input type="text" class="form-control" id="apellidoUs" name="apellidoUs" maxlength="20" required>
                     <div class="invalid-feedback">Ingresa el apellido</div>
                 </div>
 
                 <div class="col"> <!-- Columna 3 -->
-                    <label for="correoInsti" class="form-label">Correo Institucional</label>
-                    <input type="email" class="form-control" id="correoInsti" name="correo" required>
+                    <label for="correoInsti" class="form-label">Correo:</label>
+                    <input type="email" class="form-control" id="correoInsti" name="correoInsti" maxlength="50" required>
                     <div class="invalid-feedback">Ingresa un correo válido</div>
                 </div>
             </div>
 
-            <div class="row mb-3"> <!-- Fila 2 -->
-                <div class="col mb-3"> <!-- Columna 1 -->
-                    <label for="PuestUs" class="form-label">Puesto</label>
-                    <input type="text" class="form-control" id="PuestUs" name="puesto" required>
+            <div class="row mb-5"> <!-- Fila 2 -->
+                <div class="col"> <!-- Columna 1 -->
+                    <label for="PuestUs" class="form-label">Puesto:</label>
+                    <input type="text" class="form-control" id="PuestUs" name="PuestUs" maxlength="30" required>
                     <div class="invalid-feedback">Ingresa el puesto</div>
                 </div>
 
                 <div class="col"> <!-- Columna 2 -->
-                    <label for="adminUs" class="form-label">Administrador</label>
-                    <select class="form-select" id="adminUs" name="esAdmin" required>
+                    <label for="rfc" class="form-label">RFC:</label>
+                    <input type="text" class="form-control" id="rfc" name="rfc" maxlength="15" required>
+                    <div class="invalid-feedback">Ingresa tu RFC</div>
+                </div>
+
+                <div class="col"> <!-- Columna 3 -->
+                    <label for="adminUs" class="form-label">Administrador:</label>
+                    <select class="form-select" id="adminUs" name="adminUs" required>
                         <option value="" selected>Seleccionar...</option>
                         <option value="true">Sí</option>
                         <option value="false">No</option>
@@ -61,43 +66,28 @@
                     <div class="invalid-feedback">Selecciona una opción</div>
                 </div>
 
-                <div class="col"> <!-- Columna 3 -->
-                    <label for="estatusUs" class="form-label">Estatus</label>
-                    <select class="form-select" id="estatusUs" name="estatus" required>
-                        <option value="" selected>Seleccionar...</option>
-                        <option value="true">Activo</option>
-                        <option value="false">Baja</option>
-                    </select>
-                    <div class="invalid-feedback">Selecciona una opción</div>
-                </div>
             </div>
 
-            <div class="row mb-3"> <!-- Fila 3 -->
-                <div class="col mb-3"> <!-- Columna 1 -->
-                    <label for="contra1" class="form-label">Contraseña</label>
-                    <input type="password" class="form-control" id="contra1" name="contra1" required>
+            <div class="row mb-5"> <!-- Fila 3 -->
+                <div class="col"> <!-- Columna 1 -->
+                    <label for="contra1" class="form-label">Contraseña:</label>
+                    <input type="password" class="form-control" id="contra1" name="contra1" maxlength="20" required>
                     <div class="invalid-feedback">Ingresa una contraseña</div>
                 </div>
 
                 <div class="col"> <!-- Columna 2 -->
-                    <label for="contra2" class="form-label">Confirmar Contraseña</label>
-                    <input type="password" class="form-control" id="contra2" name="contra2" required>
+                    <label for="contra2" class="form-label">Confirmar Contraseña:</label>
+                    <input type="password" class="form-control" id="contra2" name="contra2" maxlength="20" required>
                     <div class="invalid-feedback">Confirma tu contraseña</div>
                 </div>
 
-                <div class="col"> <!-- Columna 3 -->
-                    <label for="rfc" class="form-label">RFC</label>
-                    <input type="text" class="form-control" id="rfc" name="rfc" required>
-                    <div class="invalid-feedback">Ingresa tu RFC</div>
+                <div class="col mt-4"> <!-- Columna 3 -->
+                    <div class="row justify-content-end me-1"> <!-- Fila 4 -->
+                        <button type="submit" class="btn gradient-button mb-0" style="width: 22rem;">Agregar</button>
+                    </div>
                 </div>
-
-
-
             </div>
 
-            <div class="row justify-content-end me-1"> <!-- Fila 4 -->
-                <button type="submit" class="btn gradient-button mb-0" style="width: 22rem;">Agregar</button>
-            </div>
         </form>
     </div>
 
@@ -139,15 +129,27 @@
                     nombreUs.classList.add('is-valid');
                 }
 
-                if (!form.checkValidity() || !allSelectsValid || !nombreUsValid) {
-                    event.preventDefault()
-                    event.stopPropagation()
+                const contra1 = form.querySelector('#contra1');
+                const contra2 = form.querySelector('#contra2');
+                let contrasenasValidas = true;
+
+                if (contra1.value !== contra2.value) {
+                    contra2.classList.add('is-invalid');
+                    contrasenasValidas = false;
+                } else {
+                    contra2.classList.remove('is-invalid');
+                    contra2.classList.add('is-valid');
                 }
 
-                form.classList.add('was-validated')
-            }, false)
-        })
-    })()
+                if (!form.checkValidity() || !allSelectsValid || !nombreUsValid || !contrasenasValidas) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+
+                form.classList.add('was-validated');
+            }, false);
+        });
+    })();
 </script>
 
 </body>

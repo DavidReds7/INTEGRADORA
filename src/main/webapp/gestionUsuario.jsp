@@ -25,9 +25,13 @@
     </header>
 
     <div class="flex-grow-1 container-xl table-responsive p-2 text-center" style="width: 82rem">
-        <table id="example" class="table table-striped table-hover table-bordered mt-3" style="width: 100%">
-            <thead>
-            <tr style="background-color: #615DFD; color: white">
+        <div class="row justify-content-end" style="width: 100%;">
+            <a href="registrarUsuario.jsp" type="button" class="btn gradient-button mb-0 fs-6 me-3" style="width: 12rem; height: 2.5rem">Agregar Usuario</a>
+        </div>
+        <div class="row" style="width: 100%;">
+            <table id="example" class="table table-striped table-hover table-bordered mt-3" style="width: 100%">
+                <thead>
+                <tr class="text-center" style="background-color: #615DFD; color: white">
                 <th>ID</th>
                 <th>Nombre</th>
                 <th>Apellido</th>
@@ -60,7 +64,7 @@
                         <img src="img/edit.png" style="width: 2rem; height: auto; cursor: pointer" alt="Actualizar">
                     </a>
                 </td>
-                <td>
+                <td class="text-center">
                     <div class="form-check form-switch">
                         <input class="form-check-input" type="checkbox" role="switch" id="switch_<%=u.getId()%>" <%=u.isEstatus() ? "checked" : ""%> onchange="toggleStatus(<%=u.getId()%>)">
                         <label class="form-check-label" style="cursor: pointer" for="switch_<%=u.getId()%>"></label>
@@ -70,6 +74,7 @@
             <% } %>
             </tbody>
         </table>
+        </div>
     </div>
 
     <!-- Modal para actualizar usuario -->
@@ -169,7 +174,7 @@
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-
+                    location.reload();
                 } else {
                     alert('Error al cambiar el estado');
                     switchElement.checked = !switchElement.checked; // Revertir cambio

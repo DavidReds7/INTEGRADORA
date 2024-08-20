@@ -44,8 +44,9 @@ public class RecuperacionServlet extends HttpServlet {
             if(insertarCodigo){
                 try {
                     GmailSender mLink = new GmailSender();
-                    String linkRecu = "</h1>Para cambiar su contraseña acceda al siguiente link: </h1><br><br>" +
-                            "</h1><a href=http://localhost:8080/scad_war_exploded/nuevaContra.jsp?codigoGenerado="+codigoGenerado+">Crear nueva contraseña</a></h1>";
+                    String linkRecu = "<h1>Para cambiar su contraseña acceda al siguiente link: </h1><br><br>" +
+                            "<h1><a href=http://localhost:8080/scad_war_exploded/nuevaContra.jsp?codigoGenerado="+codigoGenerado+">Crear nueva contraseña</a></h1><br><br>" +
+                            "<h1>Nota: Este enlance solo es válido por 30 minutos</h1>";
                     mLink.sendMail(correo,"Link de recuperación", linkRecu);
                 } catch (Exception e) {
                     throw new RuntimeException(e);

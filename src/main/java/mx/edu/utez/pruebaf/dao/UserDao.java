@@ -39,17 +39,19 @@ public class UserDao {
 
     public boolean insert(User u) {
         boolean respuesta = false;
-        String query = "INSERT INTO usuarios(nombre, apellido, correo, password, puesto, admin, rfc, estado) VALUES(?, ?, ?, SHA2(?, 256), ?, ?, ?, ?)";
+        String query = "INSERT INTO usuarios(nombre, apellido, correo, puesto, admin, rfc, password, estado) values (?,?,?,?,?,?,sha2(?,256),?)";
+
         try (Connection con = DatabaseConnectionManager.getConnection();
              PreparedStatement ps = con.prepareStatement(query)) {
+            System.out.println(ps.toString());
 
             ps.setString(1, u.getNombre());
             ps.setString(2, u.getApellido());
             ps.setString(3, u.getCorreo());
-            ps.setString(4, u.getContra());
-            ps.setString(5, u.getPuesto());
-            ps.setBoolean(6, u.isEsAdmin());
-            ps.setString(7, u.getRfc());
+            ps.setString(4, u.getPuesto());
+            ps.setBoolean(5, u.isEsAdmin());
+            ps.setString(6, u.getRfc());
+            ps.setString(7, u.getContra());
             ps.setBoolean(8, u.isEstatus());
             if (ps.executeUpdate() > 0) {
                 respuesta = true;
@@ -215,21 +217,7 @@ public class UserDao {
 
     // #################################################################################################################
 
-    public boolean deleteFisico(int id) {
-        boolean flag = false;
-        String query = "DELETE FROM usuarios WHERE idUsuarios = ?";
-        try (Connection con = DatabaseConnectionManager.getConnection();
-             PreparedStatement ps = con.prepareStatement(query)) {
 
-            ps.setInt(1, id);
-            if (ps.executeUpdate() > 0) {
-                flag = true;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return flag;
-    }
 
     public boolean deleteLogico(int id) {
         boolean flag = false;

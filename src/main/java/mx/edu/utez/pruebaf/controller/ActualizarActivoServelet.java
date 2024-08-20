@@ -11,10 +11,20 @@ import mx.edu.utez.pruebaf.model.Activo;
 
 import java.io.IOException;
 
-@WebServlet(name = "RegistrarActivo", value = "/registrarActivo")
-public class RegistrarActivo extends HttpServlet {
 
-    @Override
+@WebServlet(name = "ActualizarActivoServelet", value = "/ActualizarActivo")
+public class ActualizarActivoServelet extends HttpServlet {
+
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        //Porque estamos mandando un "?" es una request GET
+        String codigo = (req.getParameter("codigo"));
+        ActivoDao dao = new ActivoDao();
+        Activo a = dao.getOne(codigo);
+        HttpSession sesion = req.getSession();
+        sesion.setAttribute("activo", a);
+        resp.sendRedirect("ActualizarActivo.jsp");
+    }
+
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String operacion = req.getParameter("operacion");
 
@@ -46,7 +56,7 @@ public class RegistrarActivo extends HttpServlet {
 
         // Registrar o actualizar el usuario
         ActivoDao dao = new ActivoDao();
-        boolean operacionExitosa = dao.insert(a);
+        boolean operacionExitosa = dao.update(a);
 
         // Mandar una respuesta
         if (operacionExitosa) {
@@ -55,15 +65,9 @@ public class RegistrarActivo extends HttpServlet {
         } else {
             // Mandar un mensaje de error y regresar al formulario
             HttpSession sesion = req.getSession();
-            sesion.setAttribute("mensaje", operacion.equals("registrar") ?
-                    "No se pudo registrar el activo en la BD" :
-                    "No se pudo actualizar el activo en la BD");
+            sesion.setAttribute("mensaje","No se pudo actualizar el activo");
             resp.sendRedirect("registrarActivo.jsp");
         }
     }
 
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doPost(request, response);
-    }
 }

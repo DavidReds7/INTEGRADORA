@@ -11,69 +11,45 @@ import mx.edu.utez.pruebaf.model.User;
 
 import java.io.IOException;
 
-@WebServlet(name = "RegistrarUsuarioServlet", value = "/sign_in")
+@WebServlet(name = "RegistrarUsuarioServlet", value = "/registrarUsuario")
 public class RegistrarUsuarioServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String operacion = req.getParameter("operacion");
 
         // Conseguir la info del formulario
-        String nombre = req.getParameter("nombre");
-        String apellido = req.getParameter("apellido");
-        String correo = req.getParameter("correo");
-        String puesto = req.getParameter("puesto");
-        boolean esAdmin = Boolean.parseBoolean(req.getParameter("esAdmin"));
+        String nombreUs = req.getParameter("nombreUs");
+        String apellidoUs = req.getParameter("apellidoUs");
+        String correoInsti = req.getParameter("correoInsti");
+        String PuestoUs = req.getParameter("PuestUs");
         String rfc = req.getParameter("rfc");
-        boolean estatus = Boolean.parseBoolean(req.getParameter("estatus"));
+        boolean adminUs = Boolean.parseBoolean(req.getParameter("adminUs"));
+        boolean estado = true;
         String contra1 = req.getParameter("contra1");
-        String contra2 = req.getParameter("contra2");
-        String id = req.getParameter("id");  // Se usa en ambas operaciones
 
-        // Verificar que las contraseñas coincidan para el registro
-        if (operacion.equals("registrar")) {
-            if (!contra1.equals(contra2)) {
-                resp.sendRedirect("registrarUsuario.jsp");
-                return;
-            }
-        }
 
-        // Crear el objeto User
         User u = new User();
-        u.setNombre(nombre);
-        u.setApellido(apellido);
-        u.setCorreo(correo);
-        u.setPuesto(puesto);
-        u.setEsAdmin(esAdmin);
+        u.setNombre(nombreUs);;
+        u.setApellido(apellidoUs);
+        u.setCorreo(correoInsti);
+        u.setPuesto(PuestoUs);
         u.setRfc(rfc);
-        u.setEstatus(estatus);
-        u.setContra(contra1); // Usar contra1 en registro y contra en actualización
+        u.setEsAdmin(adminUs);
+        u.setEstatus(estado);
+        u.setContra(contra1);
 
-        // Establecer el ID solo si la operación es actualización
-        if (operacion.equals("actualizar")) {
-            u.setId(Integer.parseInt(id));
-        }
 
-        // Registrar o actualizar el usuario
         UserDao dao = new UserDao();
-        boolean operacionExitosa;
-        if (operacion.equals("registrar")) {
-            operacionExitosa = dao.insert(u);
-        } else {
-            operacionExitosa = dao.update(u);
-        }
+        boolean operacionExitosa = dao.insert(u);
+        System.out.println("correo usuario "+u.getCorreo());
 
-        // Mandar una respuesta
         if (operacionExitosa) {
-            // Redirigir al usuario según la operación
-            resp.sendRedirect("gestionUsuario.jsp");
+            resp.sendRedirect("gestionActivos.jsp");
         } else {
-            // Mandar un mensaje de error y regresar al formulario
+
             HttpSession sesion = req.getSession();
-            sesion.setAttribute("mensaje", operacion.equals("registrar") ?
-                    "No se pudo registrar al usuario en la BD" :
-                    "No se pudo actualizar al usuario en la BD");
-            resp.sendRedirect("index.jsp");
+            sesion.setAttribute("mensaje","No se pudo registrar el usuario");
+            resp.sendRedirect("registrarActivo.jsp");
         }
     }
 
