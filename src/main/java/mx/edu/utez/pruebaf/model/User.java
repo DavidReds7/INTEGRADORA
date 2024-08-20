@@ -9,9 +9,10 @@ public class User {
     private boolean esAdmin;
     private String rfc;
     private String contra;
-    private boolean estatus;  // Nuevo atributo para el estado del usuario
+    private boolean estatus;
+    private String codigo;
 
-    public User(int id, String nombre, String apellido, String correo, String puesto, boolean esAdmin, String rfc, boolean estatus, String contra) {
+    public User(int id, String nombre, String apellido, String correo, String puesto, boolean esAdmin, String rfc, boolean estatus, String contra, String codigo) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -20,7 +21,8 @@ public class User {
         this.esAdmin = esAdmin;
         this.rfc = rfc;
         this.contra = contra;
-        this.estatus = estatus;  // Inicialización del nuevo atributo
+        this.estatus = estatus;
+        this.codigo = codigo;
     }
 
     public User() {
@@ -98,6 +100,14 @@ public class User {
 
     public void setEstatus(boolean estatus) {  // Setter para estatus
         this.estatus = estatus;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 }
 

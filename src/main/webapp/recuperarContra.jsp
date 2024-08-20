@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SCAD</title>
+    <title>Recuperar Cuenta</title>
     <link rel="stylesheet" href="CSS/styles.css">
     <link rel="stylesheet" href="CSS/bootstrap.css">
     <link rel="icon" href="img/logo_mini.png" type="image/x-icon">
@@ -13,46 +13,33 @@
 
 <div class="d-flex-wrapper">
     <header>
-        <img src="img/headerWave.png" alt="Header Waves" class="img-fluid">
+        <div class="header-content">
+            <h1 class="scad-font">Recuperar Cuenta</h1>
+            <img src="img/headerWave.png" alt="Header Waves" class="img-fluid">
+        </div>
     </header>
     <!-- INICIO DEL CONTENIDO DE LA PAGINA -->
 
-    <div class="flex-grow-1 modal position-static d-block pt-5 position-relative" style="background-color: #E8F5FF; height: 5px; text-align: center" tabindex="-1" role="dialog" id="modalSignin">
-        <div class="modal-dialog" role="document" style="max-width: 55rem">
+
+    <div class="flex-grow-1 modal position-static d-block pt-5 pb-0 position-relative" style="background-color: #E8F5FF; height: 5px; text-align: center" tabindex="-1" role="dialog" id="modalSignin">
+        <div class="modal-dialog pt-3" role="document" style="max-width: 40rem">
             <div class="modal-content rounded-4 shadow">
                 <div class="row">
-                    <div class="col rounded-start-4" style="background: linear-gradient(45grad, #4D49FD, #0dcaf0)">
-                        <div class="row justify-content-center">
-                            <img src="img/nombreScad.png" class="pt-3 mt-5 mb-4" alt="nombreSCAD" style="width: 15rem; height: auto">
-                            <hr class="hrInicio" style="width: 19rem">
-                            <img src="img/descripScad.png" alt="descripcionSCAD" class="mb-4 pb-2" style="width: max-content; height: auto">
-                        </div>
-                        <div class="row justify-content-center">
-                            <div class="col text-center">
-                                <img src="img/utezLogo.png" alt="descripcionSCAD" style="width: 8rem; height: auto">
-                            </div>
-                            <div class="col text-center align-content-center">
-                                <img src="img/mpLogo.png" alt="descripcionSCAD" style="width: 12rem; height: auto">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-7">
+                    <div class="col" >
                         <div class="modal-header px-5 py-4 border-bottom-0">
-                            <h1 class="fw-bold mb-0 fs-3">Inicio de sesión</h1>
+                            <h1 class="fw-bold mb-2 fs-3">Ingrese su correo electrónico</h1>
                         </div>
 
                         <div class="modal-body px-5 pt-0 pb-3">
-                            <form method="post" action="login" class="needs-validation" novalidate style="text-align: center">
-                                <div class="form-floating mb-3">
-                                    <input type="email" name="correoU" class="form-control rounded-3" id="floatingInput" placeholder="nombre@utez.edu.com" required>
-                                    <label for="floatingInput">Correo electrónico</label>
+                            <form method="post" action="recuContra" class="needs-validation" novalidate style="text-align: center">
+
+                                <div class="form-floating mb-4">
+                                    <input type="email" name="correo" class="form-control rounded-3" id="floatingInput" placeholder="nombre@utez.edu.com" required>
+                                    <label for="floatingInput" style="color: gray">Correo electrónico</label>
                                     <div class="invalid-feedback">Ingrese su correo electrónico</div>
                                 </div>
-                                <div class="form-floating mb-3">
-                                    <input type="password" name="contra" class="form-control rounded-3" id="floatingPassword" placeholder="Contraseña" required>
-                                    <label for="floatingPassword">Contraseña</label>
-                                    <div class="invalid-feedback">Ingrese su contraseña</div>
-                                </div>
+
+                                <button class="w-100 gradient-button mb-3" type="submit">Enviar enlace de recuperación</button>
 
                                 <%
                                     HttpSession sesion = request.getSession();
@@ -66,8 +53,6 @@
                                     }
                                 %>
 
-                                <button class="w-100 gradient-button mb-3" type="submit">Ingresar</button>
-                                <a href="recuperarContra.jsp" class="text-decoration-none" style="color: #0c63e4">¿Olvidaste tu contraseña?</a>
                             </form>
                         </div>
                     </div>
@@ -76,12 +61,12 @@
         </div>
     </div>
 
+
     <!-- FIN DEL CONTENIDO DE LA PAGINA -->
     <footer>
         <img src="img/footerWaves.png" alt="Footer waves" class="img-fluid">
     </footer>
 </div>
-
 
 <script>
     (() => {
@@ -115,6 +100,8 @@
         })
     })()
 </script>
+
+
 
 
 </body>

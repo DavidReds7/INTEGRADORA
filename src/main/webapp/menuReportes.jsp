@@ -22,7 +22,7 @@
 
     <!-- CONTENIDO DEL MENU REPORTES (2 BOTONES) -->
     <div class="container-fluid flex-grow-1 pt-5" style="background-color: #E8F5FF; text-align: center">
-        <div class="row pb-5 gx-5">
+        <div class="row pb-5">
             <div class="col" style="text-align: center">
                 <a class="menuButtons gradient-button" href="revActivos.jsp" role="button">Revisión de Activos</a>
             </div>
@@ -30,7 +30,7 @@
                 <a class="menuButtons gradient-button" href="pdf" type="button">Generar Reporte</a>
             </div>
             <div class="col">
-                <a class="menuButtons gradient-button" href="historialCambios.jsp" type="button">Historial de cambios</a>
+                <a class="menuButtons gradient-button" href="historialActivos.jsp" type="button">Historial de cambios</a>
             </div>
         </div>
     </div>

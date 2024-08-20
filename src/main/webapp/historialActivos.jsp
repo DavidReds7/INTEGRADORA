@@ -1,5 +1,5 @@
-<%@ page import="mx.edu.utez.pruebaf.dao.HistorialDao"%>
-<%@ page import="mx.edu.utez.pruebaf.model.Historial"%>
+<%@ page import="mx.edu.utez.pruebaf.dao.HistorialActivoDao"%>
+<%@ page import="mx.edu.utez.pruebaf.model.HistorialActivo"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page contentType="text/html;charset=UTF-8"%>
 <html>
@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Historial de cambios</title>
+    <title>Historial de Activos</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/datatables.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/styles.css">
@@ -19,7 +19,7 @@
     <header>
         <div class="header-content">
             <button class="menu-btn" id="menu-btn">&#9776;</button>
-            <h1 class="scad-font">Gestión de Historial</h1>
+            <h1 class="scad-font">Historial de Activos</h1>
             <img src="img/headerWave.png" alt="Header Waves" class="img-fluid">
         </div>
     </header>
@@ -29,28 +29,34 @@
             <thead>
             <tr style="background-color: #615DFD; color: white">
                 <th>ID Cambio</th>
-                <th>Código Activo</th>
-                <th>ID Usuario</th>
+                <th>Usuario</th>
+                <th>Correo</th>
                 <th>Acción</th>
+                <th>Código Activo</th>
+                <th>Activo</th>
+                <th>Edificio</th>
+                <th>Habitacion</th>
                 <th>Fecha</th>
                 <th>Hora</th>
-                <th>Ubicación</th>
             </tr>
             </thead>
             <tbody class="table-group-divider">
             <%
-                HistorialDao dao = new HistorialDao();
-                ArrayList<Historial> lista = dao.getAll();
-                for(Historial h : lista){
+                HistorialActivoDao dao = new HistorialActivoDao();
+                ArrayList<HistorialActivo> lista = dao.getAll();
+                for(HistorialActivo h : lista){
             %>
-            <tr>
-                <td><%=h.getIdCambio()%></td>
-                <td><%=h.getActivosCodigo()%></td>
-                <td><%=h.getUsuariosIdUsuarios()%></td>
+            <tr style="text-align: left">
+                <td><%=h.getId_cambio()%></td>
+                <td><%=h.getNombre_usuario()%></td>
+                <td><%=h.getCorreo()%></td>
                 <td><%=h.getAccion()%></td>
+                <td><%=h.getCodigo_activo()%></td>
+                <td><%=h.getNombre_activo()%></td>
+                <td><%=h.getEdificio_activo()%></td>
+                <td><%=h.getHabitacion_activo()%></td>
                 <td><%=h.getFecha()%></td>
                 <td><%=h.getHora()%></td>
-                <td><%=h.getUbicacionesIdUbicacion()%></td>
             </tr>
             <% } %>
             </tbody>

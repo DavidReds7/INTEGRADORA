@@ -1,4 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
+<%@ page import="mx.edu.utez.pruebaf.model.User"%>
+<%@ page import="jakarta.servlet.http.HttpSession"%>
+<%@ page import="jakarta.servlet.http.HttpSession"%>
+<%@ page import="mx.edu.utez.pruebaf.model.User"%>
+<%@ page import="mx.edu.utez.pruebaf.dao.UserDao" %>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -62,7 +68,7 @@
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                         <li><a href="pdf" class="link-light d-inline-flex text-decoration-none rounded">Generar reporte PDF</a></li>
                         <li><a href="revActivos.jsp" class="link-light d-inline-flex text-decoration-none rounded">Revision de activos</a></li>
-                        <li><a href="historialCambios.jsp" class="link-light d-inline-flex text-decoration-none rounded">Historial de cambios</a></li>
+                        <li><a href="historialActivos.jsp" class="link-light d-inline-flex text-decoration-none rounded">Historial de cambios</a></li>
                     </ul>
                 </div>
             </li>
@@ -79,13 +85,21 @@
             </li>
             <li class="border-top my-3"></li>
         </ul>
+
+
+
         <div class="dropdown">
             <a href="#" class="d-flex align-items-center link-light text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                 <img src="img/user.png" alt="" width="32" height="32" class="rounded-circle me-2">
-                <strong style="color: white">Admin | Usuario</strong>
+                <%
+                    HttpSession sesion = request.getSession();
+                    User u = (User) sesion.getAttribute("usuario");
+                %>
+                <strong style="color: white"><%= u.getPuesto() %> | <%= u.getNombre() %></strong>
+
             </a>
             <ul class="dropdown-menu text-small shadow ms-5" style="text-align: center; background-color: rgba(232, 245, 255, 0.5)">
-                <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
+                <li><a class="dropdown-item" href="<%= request.getContextPath() %>/CerrarSesion">Cerrar sesión</a></li>
             </ul>
         </div>
     </div>

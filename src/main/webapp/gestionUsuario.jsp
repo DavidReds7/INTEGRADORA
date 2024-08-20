@@ -19,7 +19,7 @@
     <header>
         <div class="header-content">
             <button class="menu-btn" id="menu-btn">&#9776;</button>
-            <h1 class="scad-font">Gestión de Usuarios</h1>
+            <h1 class="scad-font">Gestion de Usuarios</h1>
             <img src="img/headerWave.png" alt="Header Waves" class="img-fluid">
         </div>
     </header>
@@ -28,7 +28,7 @@
         <table id="example" class="table table-striped table-hover table-bordered mt-3" style="width: 100%">
             <thead>
             <tr style="background-color: #615DFD; color: white">
-                <th>Id</th>
+                <th>ID</th>
                 <th>Nombre</th>
                 <th>Apellido</th>
                 <th>Correo</th>
@@ -57,13 +57,13 @@
                 <td><%=u.isEstatus() ? "Activo" : "Inactivo"%></td>
                 <td class="text-center">
                     <a onclick="openModal(<%=u.getId()%>)">
-                        <img src="img/edit.png" style="width: 2rem; height: auto" alt="Actualizar">
+                        <img src="img/edit.png" style="width: 2rem; height: auto; cursor: pointer" alt="Actualizar">
                     </a>
                 </td>
                 <td>
                     <div class="form-check form-switch">
                         <input class="form-check-input" type="checkbox" role="switch" id="switch_<%=u.getId()%>" <%=u.isEstatus() ? "checked" : ""%> onchange="toggleStatus(<%=u.getId()%>)">
-                        <label class="form-check-label" for="switch_<%=u.getId()%>"></label>
+                        <label class="form-check-label" style="cursor: pointer" for="switch_<%=u.getId()%>"></label>
                     </div>
                 </td>
             </tr>
@@ -78,11 +78,12 @@
             <div class="modal-content">
                 <form id="updateForm" action="ActualizarUsuarioServlet" method="post">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="updateModalLabel">Actualizar Usuario</h5>
+                        <h5 class="modal-title fs-3 ms-2" id="updateModalLabel">Actualizar Usuario</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <input type="hidden" name="id" id="userId">
+                        <input type="hidden" name="codigo" id="codigoU">
                         <div class="mb-3">
                             <label for="nombre" class="form-label">Nombre</label>
                             <input type="text" class="form-control" id="nombre" name="nombre" required>
@@ -97,7 +98,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="puesto" class="form-label">Puesto</label>
-                            <input type="text" class="form-control" id="puesto" name="puesto">
+                            <input type="text" class="form-control" id="puesto" name="puesto" required>
                         </div>
                         <div class="mb-3">
                             <label for="esAdmin" class="form-label">Administrador</label>
@@ -113,12 +114,11 @@
                         </div>
                         <div class="mb-3">
                             <label for="rfc" class="form-label">RFC</label>
-                            <input type="text" class="form-control" id="rfc" name="rfc">
+                            <input type="text" class="form-control" id="rfc" name="rfc" required>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-primary">Actualizar</button>
+                        <button type="submit" class="btn btn-secondary gradient-button">Actualizar</button>
                     </div>
                 </form>
             </div>

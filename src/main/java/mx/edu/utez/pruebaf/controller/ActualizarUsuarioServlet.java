@@ -39,10 +39,11 @@ public class ActualizarUsuarioServlet extends HttpServlet {
         String puesto = req.getParameter("puesto");
         boolean esAdmin = Boolean.parseBoolean(req.getParameter("esAdmin"));
         String rfc = req.getParameter("rfc");
-        String contra = req.getParameter("contra");
         boolean estatus = Boolean.parseBoolean(req.getParameter("estatus"));
+        String contra = req.getParameter("contra");
 
-        User u = new User(id, nombre, apellido, correo, puesto, esAdmin, rfc, estatus, contra);
+        String codigo = req.getParameter("codigo");
+        User u = new User(id, nombre, apellido, correo, puesto, esAdmin, rfc, estatus, contra, codigo);
 
         UserDao dao = new UserDao();
         boolean actualizacion = dao.update(u);

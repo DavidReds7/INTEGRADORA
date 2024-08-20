@@ -36,9 +36,9 @@
                 <th>Observaciones</th>
                 <th>Edificio</th>
                 <th>Habitacion</th>
-                <th >Actualizar</th>
-                <th >Eliminar</th>
-                <th >Detalles</th>
+                <th>Actualizar</th>
+                <th>Eliminar</th>
+                <th>Detalles</th>
             </tr>
             </thead>
 

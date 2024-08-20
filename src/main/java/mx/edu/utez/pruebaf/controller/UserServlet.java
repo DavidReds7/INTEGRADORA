@@ -30,13 +30,9 @@ public class UserServlet extends HttpServlet{
     //Normalmente siempre ocupen el método doPost
     //Para información de formularios
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // el objeto req contiene toda la información
-        // que proviene del jsp
+        // el objeto req contiene toda la información que proviene del jsp
 
-        //Es que el método doPost haga el inicio de sesión
         String correoU = req.getParameter("correoU");
-        // ^ esto funciona siii, el input del form
-        // tiene el name = "user"
         String contra = req.getParameter("contra");
 
         //En este punto solo tengo los valores de los inputs
@@ -50,9 +46,13 @@ public class UserServlet extends HttpServlet{
         System.out.println("Si el usuario existe imprime el correo y si no; imprime (null):\n"+usuario.getCorreo());
         String ruta = "index.jsp";
         HttpSession sesion = req.getSession();
-        if(usuario.getCorreo() == null){
+        if(usuario.getCorreo() == null) {
             //Entonces no voy a poder iniciar sesión
-            sesion.setAttribute("mensaje", "El usuario no existe en la base de datos o está inactivo");
+            sesion.setAttribute("mensaje", "El usuario no existe");
+
+        }else if (!usuario.isEstatus()) {
+            sesion.setAttribute("mensaje", "El usuario está inactivo");
+
         }else{
             //Entonces si inicie la sesión
             ruta = "menuPrincipal.jsp";

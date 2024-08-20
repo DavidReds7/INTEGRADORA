@@ -135,6 +135,86 @@ public class UserDao {
         return u;
     }
 
+    // Recuperacion de contraseña ######################################################################################
+    public User getOne(String correo) {
+        User u = new User();
+        String query = "SELECT * FROM usuarios WHERE correo = ?";
+        try (Connection con = DatabaseConnectionManager.getConnection();
+             PreparedStatement ps = con.prepareStatement(query)) {
+
+            ps.setString(1, correo);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    u.setCorreo(rs.getString("correo"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return u;
+    }
+
+    public boolean insertCodigo(String codigoGenerado, String correo2) {
+        boolean flag = false;
+        String query = "UPDATE Usuarios SET codigo = ? WHERE correo = ?";
+        try (Connection con = DatabaseConnectionManager.getConnection();
+             PreparedStatement ps = con.prepareStatement(query)) {
+
+            ps.setString(1, codigoGenerado);
+            ps.setString(2, correo2);
+            if (ps.executeUpdate() > 0) {
+                flag = true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return flag;
+    }
+
+    public boolean coincideCodigo(String codigoGenerado) {
+        boolean flag = false;
+        String query = "SELECT * FROM usuarios WHERE codigo = ?";
+        try (Connection con = DatabaseConnectionManager.getConnection();
+             PreparedStatement ps = con.prepareStatement(query)) {
+
+            ps.setString(1, codigoGenerado);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    System.out.println("Si existe el codigo");
+                    flag = true;
+                } else {
+                    System.out.println("No existe el codigo");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return flag;
+    }
+
+    public boolean updateContra(String contra1) {
+        boolean flag = false;
+        String query = "UPDATE Usuarios SET password = SHA2(?, 256) WHERE codigo IS NOT NULL";
+        try (Connection con = DatabaseConnectionManager.getConnection();
+             PreparedStatement ps = con.prepareStatement(query)) {
+
+            System.out.println("Ya llego al update");
+            ps.setString(1, contra1);
+            if (ps.executeUpdate() > 0) {
+                flag = true;
+                System.out.println("si se hizo update");
+            } else {
+                System.out.println("no se hizo update");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return flag;
+    }
+
+
+    // #################################################################################################################
+
     public boolean deleteFisico(int id) {
         boolean flag = false;
         String query = "DELETE FROM usuarios WHERE idUsuarios = ?";
